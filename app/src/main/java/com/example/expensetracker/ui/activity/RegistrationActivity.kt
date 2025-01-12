@@ -11,6 +11,7 @@ import com.example.expensetracker.R
 import com.example.expensetracker.databinding.ActivityRegistrationBinding
 import com.example.expensetracker.model.UserModel
 import com.example.expensetracker.repository.UserRepositoryImpl
+import com.example.expensetracker.utils.LoadingUtils
 import com.example.expensetracker.viewmodel.UserViewModel
 
 class RegistrationActivity : AppCompatActivity() {
@@ -19,6 +20,8 @@ class RegistrationActivity : AppCompatActivity() {
 
     lateinit var userViewModel: UserViewModel
 
+    lateinit var loadingUtils: LoadingUtils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,11 +29,14 @@ class RegistrationActivity : AppCompatActivity() {
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        loadingUtils = LoadingUtils(this)
+
         var repo = UserRepositoryImpl()
         userViewModel = UserViewModel(repo)
 
 
         binding.signUp.setOnClickListener {
+            loadingUtils.show()
             var email = binding.registerEmail.text.toString()
             var password = binding.registerPassword.text.toString()
             var firstName = binding.registerFname.text.toString()
@@ -51,12 +57,14 @@ class RegistrationActivity : AppCompatActivity() {
                     userViewModel.addUserToDatabase(userId,userModel){
                             success,message->
                         if(success){
+                            loadingUtils.dismiss()
                             Toast.makeText(
                                 this@RegistrationActivity,
                                 message,
                                 Toast.LENGTH_LONG
                             ).show()
                         }else{
+                            loadingUtils.dismiss()
                             Toast.makeText(
                                 this@RegistrationActivity,
                                 message,
@@ -65,6 +73,7 @@ class RegistrationActivity : AppCompatActivity() {
                         }
                     }
                 } else {
+                    loadingUtils.dismiss()
                     Toast.makeText(
                         this@RegistrationActivity,
                         message,
