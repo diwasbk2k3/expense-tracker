@@ -2,6 +2,7 @@ package com.example.expensetracker.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -43,6 +44,14 @@ class ProductDashboardActivity : AppCompatActivity() {
         binding.floatingActionButton.setOnClickListener{
             var intent = Intent(this@ProductDashboardActivity, AddProductActivity::class.java)
             startActivity(intent)
+        }
+
+        productViewModel.loading.observe(this){loading->
+            if(loading){
+                binding.progressBar.visibility = View.VISIBLE
+            }else{
+                binding.progressBar.visibility = View.GONE
+            }
         }
 // yo chaidaina
 //        setContentView(R.layout.activity_product_dashboard)
