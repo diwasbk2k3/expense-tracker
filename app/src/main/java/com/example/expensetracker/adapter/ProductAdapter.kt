@@ -21,19 +21,18 @@ class ProductAdapter (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        TODO("Not yet implemented")
         // hamro recyclerView ekatira cha ani sample_file ekatira cha (so we link them here together)
         val itemView: View = LayoutInflater.from(context).inflate(R.layout.sample_file, parent, false)
         return ProductViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+
         return  data.size
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        TODO("Not yet implemented")
+
         // LHS is from the above binding and RHS is from the Model
         holder.pName.text = data[position].productName
         holder.pDesc.text = data[position].productDesc

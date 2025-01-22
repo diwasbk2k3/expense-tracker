@@ -1,5 +1,6 @@
 package com.example.expensetracker.repository
 
+import android.util.Log
 import com.example.expensetracker.model.ProductModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -70,7 +71,7 @@ class ProductRepositoryImpl: ProductRepository {
     override fun getAllProduct(callback: (List<ProductModel>?, Boolean, String) -> Unit) {
         ref.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                var products = mutableListOf<ProductModel?>()
+                var products = mutableListOf<ProductModel>()
                 if(snapshot.exists()){
                     for(eachProduct in snapshot.children){
                         var data = eachProduct.getValue(ProductModel::class.java)
@@ -78,6 +79,7 @@ class ProductRepositoryImpl: ProductRepository {
                             products.add(data)
                         }
                     }
+                    callback(products,true,"success")
                 }
             }
 
