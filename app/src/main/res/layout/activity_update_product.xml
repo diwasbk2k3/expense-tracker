@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.UpdateProductActivity">
+    tools:context=".ui.activity.AddProductActivity">
 
     <TextView
         android:id="@+id/textView3"
@@ -28,9 +28,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/updateProductName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="update product name" />
+            android:hint="enter product's new name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -43,9 +44,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/updateProductDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="update product description" />
+            android:hint="enter product's new description" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -58,13 +60,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/updateProductPrice"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="update product price" />
+            android:hint="enter product's new price" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnAddProduct"
+        android:id="@+id/btnUpdateProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
