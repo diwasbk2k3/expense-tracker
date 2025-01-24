@@ -1,6 +1,7 @@
 package com.example.expensetracker.ui.activity
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -35,7 +36,27 @@ class UpdateProductActivity : AppCompatActivity() {
             binding.updateProductPrice.setText(it?.price.toString())
             binding.updateProductDescription.setText(it?.productDesc.toString())
         }
-//        setContentView(R.layout.activity_update_product)
+
+        binding.btnUpdate.setOnClickListener {
+            var name = binding.updateProductName.text.toString()
+            var price = binding.updateProductPrice.text.toString().toInt()
+            var desc = binding.updateProductDescription.text.toString()
+
+            var updatedMap = mutableMapOf<String, Any>()
+            updatedMap["productName"] = name
+            updatedMap["productDesc"] = desc
+            updatedMap["price"] = price
+
+            productViewModel.updateProduct(productId, updatedMap){
+                success, message->
+                if (success) {
+                    Toast.makeText(this, "Product updated successfully!", Toast.LENGTH_SHORT).show()
+                    finish()
+                } else {
+                    Toast.makeText(this, "Failed to update product: $message", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
