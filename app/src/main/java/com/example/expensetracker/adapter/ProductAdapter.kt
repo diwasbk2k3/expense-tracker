@@ -52,4 +52,9 @@ class ProductAdapter (
         data.addAll(products)
         notifyDataSetChanged() // App refresh nagari data change or display gardincha (state manage garcha)
     }
+
+    // for deleting the products
+    fun getProductId(position: Int): String{
+        return data[position].productId
+    }
 }
